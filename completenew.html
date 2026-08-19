@@ -23,12 +23,20 @@
             a {
                 color: rgb(225, 225, 255);
             }
+
         </style>
     </head>
     <body>
         <canvas id="canvasA" width="128" height="128"></canvas>
         <script>
             "use strict";
+                var TickCounterEnabled = false;
+                window.enableCounter = function() {
+                    TickCounterEnabled = true;
+                    if (bi) {
+                        bi.dq = true;
+                    }
+                };
                 var S = ["div", "100%", "⬅️ ", "absolute", "canvas", "0.75em", "none", "<br>", "inherit", "0.8em", "rgb(", "center", "auto", "rgba(", "   ", "flex", "hidden", "1em", "span", "0.5em", "email", "Data", " / ", "territorial.io", "pre", "password", "input", "iVBORw0KGgoAAAANSUhEUgAAADAAAAAKAQMAAADILU8PAAAABlBMVEUAAAD///+l2Z/dAAAAOklEQVQI12P48efPH5v/DEDyT81/hjMHDhxIkWA4AqV+/PgBpf5JgOWA1B0gdUyC4cefA3+A1AcwBQAlGyu1reW1ZgAAAABJRU5ErkJggg==", "click", "undefined", "middle", "break-word", "50%", "0.6em", "underline", "text", "scroll", "pointer", "function", "bold", "Value", "Escape", "Enter", "1.5em", "0.4em", "' target='_blank'>", "string", "rgba(0,0,0,0.8)", "pre-wrap", "orange", "number", "nowrap", "mouseleave", "inline-block", "game.territorial.io", "focus", "fixed", "blur", "Space", "Redacted ", "Player ", "Gold Seizure", "<a href='", "</a>", "100,100,100", "1.2em", "1.0em", "0px", "0.3em", "0.0em 0.9em", " voted with ", "  • ", "   Gold: ", "🔄 Reload", "⚠️ ", "wheel", "translate(-50%, -50%)", "top", "tls7", "system-ui", "rgba(140,10,10,0.75)", "rgba(100,0,0,0.8)", "rgba(10,140,10,0.75)", "rgba(0,100,0,0.8)", "rgba(0,", "rgb(10,220,10)", "placeholder", "mouseover", "mouseout", "long", "logo", "loading", "keydown", "italic ", "file", "error", "en-US", "dotted", "data:image/png;base64,", "column", "break-all", "blur(4px)", "arena", "account", "accept", "_blank", "[Redacted Message]", "Zombie", "Seed", "Remove Punishments", "Reload", "Patreon", "Interest", "False Reporter", "Cheater", "Bot ", "Block Account", "Battle Royale", "Ban IP", "Back", "Audit Log", "Arial Black, system-ui", "@room", "255,255,255", "1v1", "1px 1px 0 lightgray", "1px -1px 0 lightgray,", "1 Minute", "1 Hour", "1 Day", "0em", "000", "0.4em 0em", "0.2em", "0,0,0", "/wiki/transactions", "/wiki/clans", "/privacy", ". Duration: x", "-1px 1px 0 lightgray,", "-1px -1px 0 lightgray,", ",0,0.85)", " solid white;}", " Rank: ", " / 180", " / 160", " -> ", "   Contest"];
                 function a() {
                     var b;
@@ -12320,6 +12328,8 @@
                     var j5;
                     var a5Z;
                     var a74;
+                    var barHeight;
+                    var barBottom;
                     var a8c;
                     var a9i = 11 / 12;
                     this.fb = 0;
@@ -12340,8 +12350,9 @@
                         } else {
                             j = Math.floor((a1.a2.ib() ? 0.65 : 0.389) * i.ic);
                             j += (12 - j % 12);
-                            this.k = Math.floor(j / 12);
+                        this.k = Math.floor(j / 12);
                         }
+                        barHeight = this.k;
                         a9h = Math.floor(3 * this.k / 2);
                         a74 = bD.rL.t9(1, Math.floor(0.5 * this.k));
                         canvas = document.createElement(S[4]);
@@ -12364,6 +12375,7 @@
                             fZ = Math.floor((i.j - j) / 2);
                         }
                         this.fb = i.k - this.k - bn.a6T() * bf.gap;
+                        barBottom = this.fb;
                     }
                     ;
                     this.n9 = function() {
@@ -12389,28 +12401,29 @@
                     }
                     function a9k() {
                         var a8j = Math.floor(j5 * (j - 2 * a9h));
-                        var a9n = 1 + Math.floor(0.0625 * aS.k);
-                        var a9o = 1 + Math.floor(0.3 * aS.k);
-                        var a9p = Math.floor(0.55 * aS.k);
-                        zX.clearRect(0, 0, j, aS.k);
+                        var a9n = 1 + Math.floor(0.0625 * barHeight);
+                        var a9o = 1 + Math.floor(0.3 * barHeight);
+                        var a9p = Math.floor(0.55 * barHeight);
+                        zX.clearRect(0, 0, j, barHeight);
                         zX.fillStyle = bE.oK;
-                        zX.fillRect(0, 0, a9h, aS.k);
-                        zX.fillRect(a9h + a8j, 0, j - a9h - a8j, aS.k);
+                        zX.fillRect(0, 0, a9h, barHeight);
+                        zX.fillRect(a9h + a8j, 0, j - a9h - a8j, barHeight);
                         zX.fillStyle = a9l();
-                        zX.fillRect(a9h, 0, a8j, aS.k);
+                        zX.fillRect(a9h, 0, a8j, barHeight);
                         zX.fillStyle = bE.oO;
                         zX.fillRect(0, 0, j, 1);
-                        zX.fillRect(0, aS.k - 1, j, 1);
-                        zX.fillRect(0, 0, 1, aS.k);
-                        zX.fillRect(a9h, 0, 1, aS.k);
-                        zX.fillRect(a9h + a8j, 0, 1, aS.k);
-                        zX.fillRect(j - a9h, 0, 1, aS.k);
-                        zX.fillRect(j - 1, 0, 1, aS.k);
-                        zX.fillRect(Math.floor(0.25 * aS.k) + a9o, Math.floor((aS.k - a9n) / 2), aS.k - 2 * a9o, a9n);
-                        zX.fillRect(Math.floor(j - 1.25 * aS.k) + a9o, Math.floor((aS.k - a9n) / 2), aS.k - 2 * a9o - a9o % 2, a9n);
-                        zX.fillRect(Math.floor(j - 1.25 * aS.k) + Math.floor((aS.k - a9n) / 2), a9o, a9n, aS.k - 2 * a9o - a9o % 2);
-                        a5Z = bD.go.j4(aE.fC, aS.hw());
+                        zX.fillRect(0, barHeight - 1, j, 1);
+                        zX.fillRect(0, 0, 1, barHeight);
+                        zX.fillRect(a9h, 0, 1, barHeight);
+                        zX.fillRect(a9h + a8j, 0, 1, barHeight);
+                        zX.fillRect(j - a9h, 0, 1, barHeight);
+                        zX.fillRect(j - 1, 0, 1, barHeight);
+                        zX.fillRect(Math.floor(0.25 * barHeight) + a9o, Math.floor((barHeight - a9n) / 2), barHeight - 2 * a9o, a9n);
+                        zX.fillRect(Math.floor(j - 1.25 * barHeight) + a9o, Math.floor((barHeight - a9n) / 2), barHeight - 2 * a9o - a9o % 2, a9n);
+                        zX.fillRect(Math.floor(j - 1.25 * barHeight) + Math.floor((barHeight - a9n) / 2), a9o, a9n, barHeight - 2 * a9o - a9o % 2);
+                        a5Z = bD.go.j4(aE.fC, bO.ia(Math.floor(j5 * 1024 + 0.5) - 1, 0, 1023));
                         zX.fillText(bD.sK.a0f(a5Z) + " (" + bD.sK.a5S(100 * j5, +(j5 < 0.1)) + ")", Math.floor(0.5 * j), a9p);
+                        zX.font = a74;
                     }
                     this.iE = function() {
                         return !(!iE || aN.hc && fZ < Math.floor(bf.gap + 5.5 * this.k));
@@ -12440,16 +12453,16 @@
                     }
                     ;
                     function a9r(m2, m3) {
-                        return m2 > fZ && m2 < fZ + a9h && m3 > aS.fb;
+                        return m2 > fZ && m2 < fZ + a9h && m3 > barBottom;
                     }
                     function a9s(m2, m3) {
-                        return m2 > fZ + j - a9h && m2 < fZ + j && m3 > aS.fb;
+                        return m2 > fZ + j - a9h && m2 < fZ + j && m3 > barBottom;
                     }
                     this.hf = function(m2, m3) {
                         if (!this.iE()) {
                             return false;
                         }
-                        if (!aS.a3O(m2, m3)) {
+                        if (!this.a3O(m2, m3)) {
                             return false;
                         }
                         aT.nt = false;
@@ -12550,6 +12563,8 @@
                         if (a5Z !== bD.go.j4(aE.fC, this.hw())) {
                             a8c = true;
                         }
+                        a9k();
+                        bi.dq = true;
                     }
                     ;
                     this.vw = function() {
@@ -13337,17 +13352,27 @@
                         zX.font = aBA;
                         zX.fillStyle = ej === 9 ? bE.pW : bE.oO;
                         var aBL = af.aBM;
-                        var aBN = "+" + aBL;
-                        var tj = zX.measureText(aBN).width;
-                        var aBO = Math.floor(this.k / 12);
-                        var no = 0.5 * (j + ti) + aBO;
-                        if (no + tj + aB9 <= j) {
-                            zX.fillText(aBN, Math.floor(no + 0.5 * tj), Math.floor(0.3 * this.k));
-                        } else if (aBL >= 1000) {
-                            aBN = "+" + Math.floor(aBL / 1000) + "K";
-                            tj = zX.measureText(aBN).width;
+                        zX.font = aBA;
+                        if (TickCounterEnabled) {
+                            var tick = bi.a1Y ? Math.floor(bi.kk() / 10) % 10 : 0;
+                            zX.fillStyle = bE.oO;
+                            zX.textAlign = "right";
+                            zX.fillText(String(tick), Math.floor(0.945 * j), Math.floor(0.3 * this.k));
+                            zX.textAlign = "center";
+                        } else {
+                            zX.fillStyle = ej === 9 ? bE.pW : bE.oO;
+                            var aBN = "+" + aBL;
+                            var tj = zX.measureText(aBN).width;
+                            var aBO = Math.floor(this.k / 12);
+                            var no = 0.5 * (j + ti) + aBO;
                             if (no + tj + aB9 <= j) {
                                 zX.fillText(aBN, Math.floor(no + 0.5 * tj), Math.floor(0.3 * this.k));
+                            } else if (aBL >= 1000) {
+                                aBN = "+" + Math.floor(aBL / 1000) + "K";
+                                tj = zX.measureText(aBN).width;
+                                if (no + tj + aB9 <= j) {
+                                    zX.fillText(aBN, Math.floor(no + 0.5 * tj), Math.floor(0.3 * this.k));
+                                }
                             }
                         }
                         zX.fillStyle = bE.oO;
@@ -18793,7 +18818,7 @@
                     this.di = function() {
                         aLT = bm.eW.data[7].value || aE.l5 === 8;
                         aLG = false;
-                        aLC = 0.99;
+                        aLC = 0.98;
                         aL9 = 0.5;
                         aLA = 1.8;
                         aLB = 12 - 3 * bm.eW.data[9].value;
