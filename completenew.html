@@ -12337,7 +12337,13 @@
                     this.di = function() {
                         iE = !aE.hq && !aE.hb;
                         a8c = false;
-                        j5 = (bm.eW.data[182].value + 1) / 1024;
+                        // Preserve the existing d182-derived start value unless the
+                        // optional "Start 50%" setting has been enabled.
+                        var startAt50 = false;
+                        try {
+                            startAt50 = localStorage.getItem("aTTStartAt50") === "true";
+                        } catch (e) {}
+                        j5 = startAt50 ? 0.5 : (bm.eW.data[182].value + 1) / 1024;
                         a5Z = 0;
                         this.hg = false;
                         this.resize();
@@ -33442,6 +33448,7 @@
                     }
                     window.aTTPercentKeybindsReady = true;
                     var storageKey = "aTTPercentKeybinds";
+                    var startAt50StorageKey = "aTTStartAt50";
                     var binds = aTTLoad();
                     var panel;
                     var list;
@@ -33556,6 +33563,30 @@
                         };
                         panel.appendChild(titleRow);
                         panel.appendChild(note);
+
+                        var startAt50Row = document.createElement("label");
+                        startAt50Row.style.display = "flex";
+                        startAt50Row.style.alignItems = "center";
+                        startAt50Row.style.gap = "8px";
+                        startAt50Row.style.margin = "0 0 14px";
+                        startAt50Row.style.cursor = "pointer";
+                        var startAt50 = document.createElement("input");
+                        startAt50.type = "checkbox";
+                        try {
+                            startAt50.checked = localStorage.getItem(startAt50StorageKey) === "true";
+                        } catch (e) {
+                            startAt50.checked = false;
+                        }
+                        startAt50.onchange = function() {
+                            try {
+                                localStorage.setItem(startAt50StorageKey, startAt50.checked ? "true" : "false");
+                            } catch (e) {}
+                        };
+                        var startAt50Text = document.createElement("span");
+                        startAt50Text.textContent = "Start 50%";
+                        startAt50Row.appendChild(startAt50);
+                        startAt50Row.appendChild(startAt50Text);
+                        panel.appendChild(startAt50Row);
                         panel.appendChild(list);
                         panel.appendChild(add);
                         document.body.appendChild(panel);
